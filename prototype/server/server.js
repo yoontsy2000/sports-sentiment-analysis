@@ -1,18 +1,22 @@
 const express = require('express');
 const Twitter = require('twitter');
+const ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
+const { IamAuthenticator } = require('ibm-watson/auth');
 const config = require('dotenv/config');
 const cors = require('cors');
+
 
 const app = express();
 const port = 5000;
 
 app.use(cors())
 
+// TWITTER API
+
 const API_KEY = process.env.API_KEY;
 const API_SECRET_KEY = process.env.API_SECRET_KEY;
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const ACESSS_SECRET_TOKEN = process.env.ACESSS_SECRET_TOKEN;
-
 
 const client = new Twitter({
   consumer_key: API_KEY,
@@ -20,16 +24,6 @@ const client = new Twitter({
   access_token_key: ACCESS_TOKEN,
   access_token_secret: ACESSS_SECRET_TOKEN
 });
-
-// const get_user_timeline = new Promise((resolve, reject) => {
-//   client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//     if (!error) {
-//       resolve(tweets);
-//     } else {
-//       reject("Returned with error:", error);
-//     }
-//   });
-// });
 
 const search_tweets = (query) => new Promise((resolve, reject) => {
   client.get('search/tweets', {q: query, result_type: 'popular', count: 5}, function(error, tweets, response) {
@@ -51,4 +45,35 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Currently running in localhost:${port}`);
+})
+
+// WATSON API
+
+const WATSON_API_KEY = process.env.WATSON_API_KEY;
+const WATSON_API_URL = process.env.WATSON_API_URL;
+
+console.log(WATSON_API_KEY)
+
+const SAMPLE_TEXT = {
+  "text": "Team, I know that times are tough! Product sales have been disappointing for the past three quarters. We have a competitive product, but we need to do a better job of selling it!"
+}
+
+const toneAnalyzer = new ToneAnalyzerV3({
+  authenticator: new IamAuthenticator({ apikey: WATSON_API_KEY }),
+  version: '2016-05-19',
+  serviceUrl: WATSON_API_URL
+});
+
+app.get('/tone', (req, res) => {
+  toneAnalyzer.tone(
+    {
+      toneInput: SAMPLE_TEXT.text,
+      contentType: 'text/plain'
+    })
+    .then(response => {
+      console.log(JSON.stringify(response.result, null, 2));
+    })
+    .catch(err => {
+      console.log(err);
+    });
 })
