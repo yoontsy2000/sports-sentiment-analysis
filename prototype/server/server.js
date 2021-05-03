@@ -1,15 +1,33 @@
+// Middleware functions
 const express = require('express');
+const cors = require('cors');
+
+// API functions
 const Twitter = require('twitter');
 const ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
-const config = require('dotenv/config');
-const cors = require('cors');
 
+// Database
+const mongoose = require("mongoose");
+
+// Configuration
+const config = require('dotenv/config');
 
 const app = express();
 const port = 5000;
 
 app.use(cors())
+
+// MONGODB
+
+const MONGO_URI = "mongodb+srv://tsyoon:ntQqqEC72idd7nPu@cluster0.kvk58.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Connected successfully")
+});
 
 // TWITTER API
 
