@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useContext, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -16,9 +17,46 @@ export default function Login() {
   // const classes = useStyles();
   // const theme = useTheme();
 
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
+    console.log(`Changed state of ${name} to ${value}`)
+  }
+
+  const login = async (userData) => {
+    return axios.post('http://127.0.0.1:5000/api/users/login',
+      userData,
+      {headers: {'Content-Type': 'application/json'}}
+    ).then(() => {
+      console.log("Logged in!")
+    }).catch(() => {
+      console.log("Login fail!")
+    })
+  }
+
+  const onSubmit = (event) => {
+    console.log("Submitted!")
+    login(userData)
+    event.preventDefault();
+  }
+
+  const userData = {
+    email: email,
+    password: password,
+  }
+
   return (
     <div className="main">
-      <form className="form">
+      <form className="form" noValidate>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -32,6 +70,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onChangeHandler}
         />
         <TextField
           variant="outlined"
@@ -43,8 +82,9 @@ export default function Login() {
           type="password"
           id="password"
           autoComplete="current-password"
+          onChange={onChangeHandler}
         />
-        <Button color="secondary">
+        <Button color="secondary" onClick = {onSubmit}>
           Login
         </Button>
         <Link href="/register" variant="body2">
