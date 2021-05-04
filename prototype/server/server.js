@@ -109,3 +109,40 @@ app.get('/tone', (req, res) => {
       console.log(err);
     });
 })
+
+app.get('/tone/tweets', (req, res) => {
+  search_tweets("#nba").then(tweets => {
+    const parsedText = {
+      "text": ""
+    }
+    tweets.statuses.forEach(status => {
+      parsedText.text += status.text
+    })
+    //console.log(parsedText)
+    return (parsedText)
+  }).then(parsedText => {
+    toneAnalyzer.tone(
+      {
+        toneInput: parsedText,
+        contentType: 'text/plain'
+      })
+      .then(response => {
+        var document_tone = response.result.document_tone.tone_categories[0]
+        //var tone_categories = document_tone.tone_categories
+        // tone_categories.forEach((tone_category) => {
+        //   console.log(tone_category.category_name)
+        //   console.log()
+        //   tone_category.tones.forEach((tone) => {
+        //     const toneScore = tone.score
+        //     console.log(tone)
+        //   })
+        // })
+        console.log(document_tone)
+        //console.log(JSON.stringify(response.result.document_tone, null, 2));
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+  )
+})
