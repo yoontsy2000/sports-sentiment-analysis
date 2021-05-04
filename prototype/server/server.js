@@ -1,15 +1,47 @@
+// Middleware functions
 const express = require('express');
+const cors = require('cors');
+
+// API functions
 const Twitter = require('twitter');
 const ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
-const config = require('dotenv/config');
-const cors = require('cors');
 
+// Database
+const mongoose = require("mongoose");
+const passport = require("passport");
+const users = require("./routes/api/users");
+
+// Configuration
+const config = require('dotenv/config');
 
 const app = express();
 const port = 5000;
 
 app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded());
+
+// PASSPORT
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+app.use("/api/users", users);
+
+
+// MONGODB
+
+const MONGO_URI = process.env.MONGO_URI
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Connected successfully")
+});
 
 // TWITTER API
 
