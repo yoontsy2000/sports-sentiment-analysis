@@ -9,6 +9,8 @@ const { IamAuthenticator } = require('ibm-watson/auth');
 
 // Database
 const mongoose = require("mongoose");
+const passport = require("passport");
+const users = require("./routes/api/users");
 
 // Configuration
 const config = require('dotenv/config');
@@ -17,10 +19,22 @@ const app = express();
 const port = 5000;
 
 app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded());
+
+// PASSPORT
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+app.use("/api/users", users);
+
 
 // MONGODB
 
-const MONGO_URI = "mongodb+srv://tsyoon:ntQqqEC72idd7nPu@cluster0.kvk58.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGO_URI
 mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
