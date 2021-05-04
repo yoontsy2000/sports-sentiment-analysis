@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
@@ -6,38 +7,71 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-// const useStyles = makeStyles((theme) => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//   },
-//   avatar: {
-//     margin: theme.spacing(1),
-//     backgroundColor: theme.palette.secondary.main,
-//   },
-//   form: {
-//     width: '100%', // Fix IE 11 issue.
-//     marginTop: theme.spacing(3),
-//   },
-//   submit: {
-//     margin: theme.spacing(3, 0, 2),
-//   },
-// }));
-
 export default function Login() {
 
-  // const classes = useStyles();
-  // const theme = useTheme();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [error, setError] = useState(false);
 
-  // const classes = useStyles();
+  const onChangeHandler = (event) => {
+    const { name, value } = event.currentTarget;
+    switch (name) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'name':
+        setName(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      case 'password2':
+        setPassword2(value);
+        break;
+      default:
+        break;
+    }
+    console.log(`Changed state of ${name} to ${value}`)
+  }
+
+  const register = async (userData) => {
+    return axios.post('http://127.0.0.1:5000/api/users/register',
+      userData,
+      {headers: {'Content-Type': 'application/json'}}
+    ).then(() => {
+      console.log("True")
+      setError(false)
+    }).catch(() => {
+      console.log("Fail")
+      setError(true)
+    })
+  }
+
+  const onSubmit = (event) => {
+    console.log("Submitted!")
+    register(userData)
+    event.preventDefault();
+  }
+
+  const userData = {
+    name: name,
+    email: email,
+    password: password,
+    password2: password2
+  }
+
   return (
     <div className="main">
-      <form className="form">
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
+      {
+        error &&
+        <h2>Failed</h2>
+      }
+      <form className="form" noValidate>
+      <Typography component="h1" variant="h5">
+        Sign up
+      </Typography>
         <TextField
             variant="outlined"
             margin="normal"
@@ -48,6 +82,7 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={onChangeHandler}
         />
         <TextField
           variant="outlined"
@@ -59,6 +94,7 @@ export default function Login() {
           type="name"
           id="name"
           autoComplete="name"
+          onChange={onChangeHandler}
         />
         <TextField
           variant="outlined"
@@ -69,18 +105,25 @@ export default function Login() {
           label="Password"
           type="password"
           id="password"
+          onChange={onChangeHandler}
         />
         <TextField
           variant="outlined"
           margin="normal"
           required
           fullWidth
-          name="confirm-password"
+          name="password2"
           label="Confirm Password"
-          type="confirm-password"
-          id="confirm-password"
+          type="password"
+          id="password2"
+          onChange={onChangeHandler}
         />
-        <Button className="registerbutton" color="secondary">
+        <Button 
+          className="registerbutton" 
+          color="secondary" 
+          type="submit"
+          onClick = {onSubmit}
+          >
           Register
         </Button>
         <Link href="/login" variant="body2">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,10 @@ import Link from '@material-ui/core/Link';
 
 
 export default function Login() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   // const classes = useStyles();
   // const theme = useTheme();
