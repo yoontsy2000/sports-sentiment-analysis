@@ -1,5 +1,5 @@
 # Live Sports Sentiments
-## See what fans are feeling about live sport events with detailed analytics.\You can also search custom tags and keywords to see other emotional sentiment scores.
+## See what fans are feeling about live sport events with detailed analytics. You can also search custom tags and keywords to see other emotional sentiment scores.
 
 ## You will need to generate your own Twitter API keys.
 Twitter uses OAuth 2.0. More will be explained later in this document.
@@ -34,6 +34,9 @@ TWITTER_ACESSS_SECRET_TOKEN=<your token here>
 
 WATSON_API_KEY=<your key here>
 WATSON_API_URL=<your generated url here>
+
+SPORTS_API_KEY=<your key here>
+SPORTS_API_URL=<your url here>
 
 MONGO_URI=<your mongodb uri here>
 `
