@@ -17,6 +17,12 @@ This project uses the following APIs:
 - [Watson Tone Analyzer](https://www.ibm.com/watson/services/tone-analyzer/)
 - [iSports API](https://www.isportsapi.com/docs.html)
 
+**Here are some articles and resources that we used as references to implement certain functions:**
+- [Build A Login/Auth App with MERN Stack](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
+- [Material UI Dashboard Template](material-ui.com/getting-started/templates/)
+- [Material UI Registration Template](https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up)
+- [ChartJS](https://www.chartjs.org/docs/latest/)
+
 ## Available Scripts
 
 Make sure to download the packages in the prototype directory.
