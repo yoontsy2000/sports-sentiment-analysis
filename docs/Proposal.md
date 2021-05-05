@@ -25,7 +25,7 @@ Team members: Alvaro Carrascosa, Tae Sung Yoon, Yanyang Wang, Shuohe Ren, Mark N
     - IBM's Watson API will be used to analyze the sentiment and more of such tweets
     
   - OAuth:
-    - Twitter's API will be used to help users log in.
+    - Twitter's API will require OAuth 2.0.
     
   - Decoupled Structure:
     - ReactJS will be used for frontend
