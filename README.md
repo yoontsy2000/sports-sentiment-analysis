@@ -24,36 +24,35 @@ Make sure to download the packages in the prototype directory.
 
 ## ENV File
 
-You will need to 
+You will need to generate a dotenv file (.env) and place it in the protoype folder.
 
-`
-TWITTER_API_KEY=<your key here>
-TWITTER_API_SECRET_KEY=<your key here>
-TWITTER_ACCESS_TOKEN=<your token here>
-TWITTER_ACESSS_SECRET_TOKEN=<your token here>
+    TWITTER_API_KEY=<your key here>
+    TWITTER_API_SECRET_KEY=<your key here>
+    TWITTER_ACCESS_TOKEN=<your token here>
+    TWITTER_ACESSS_SECRET_TOKEN=<your token here>
 
-WATSON_API_KEY=<your key here>
-WATSON_API_URL=<your generated url here>
+    WATSON_API_KEY=<your key here>
+    WATSON_API_URL=<your generated url here>
 
-SPORTS_API_KEY=<your key here>
-SPORTS_API_URL=<your url here>
+    SPORTS_API_KEY=<your key here>
+    SPORTS_API_URL=<your url here>
 
-MONGO_URI=<your mongodb uri here>
-`
+    MONGO_URI=<your mongodb uri here>
+
 
 After installing the necessary packages, in the prototype directory, you can run the application:
-### `npm run dev` 
+### `npm run dev` </br>
 This will run both the client and the server. Make sure that you're running this command inside the `prototype` directory.
 
 Some Windows user may face problems with running the command above, so instead run this:
-### `npm run server`
+### `npm run server` </br>
 ### `npm run client`
 Again, make sure that you're running this command inside the `prototype` directory.
 
 This will run the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-Access [http://localhost:5000](http://localhost:5000) to view the backend server.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. </br>
+Access [http://localhost:5000](http://localhost:5000) to view the backend server. </br>
 
-The page will reload if you make edits.\ 
-**HOWEVER, ANY CHANGES MADE TO THE SERVER WILL REQUIRE YOU TO RESTART THE SERVER.
+The page will reload if you make edits.\ </br>
+**HOWEVER, ANY CHANGES MADE TO THE SERVER WILL REQUIRE YOU TO RESTART THE SERVER.**</br>
 You will also see any lint errors in the console.
