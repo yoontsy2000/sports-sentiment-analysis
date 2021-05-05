@@ -8,6 +8,7 @@ import {
 import Tweets from './Tweets'
 import Login from './Login'
 import Register from './Register'
+import Dashboard from './Dashboard'
 
 function App() {
 
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
         </Switch>  
       </Router>   
