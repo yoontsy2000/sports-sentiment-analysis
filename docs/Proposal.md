@@ -1,18 +1,23 @@
 Team members: Alvaro Carrascosa, Tae Sung Yoon, Yanyang Wang, Shuohe Ren, Mark Nam
 
 
-Idea 1: Live Sports Event Opinion Categorizer
+**(Selected) Idea 1**: Live Sports Sentiment Analyser 
 
-  - Description: A web app that shows users a list of live sports events all of which contain updated live popular opinions categorized by positive or negative for each team.
+**(Edits: This proposal seemed too big for the scope of this project, and we have modified it accordingly)**
+
+  - Description: A web app that shows users a list of live sports events all of which contain updated live popular opinions categorized by positive or negative for teams.
   - Detailed description:
     - This app allows users to pick from different live sports events from different categories,
       and displays analyzed tweets categorized by teams and by positive or negative.
-    - It also displays a metric to measure the amount of positive versus negative comments regarding each team.
-    - It compares that metric to previous events to assess wether the team is outperforming or underperforming expectations.
+    - ~~It also displays a metric to measure the amount of positive versus negative comments regarding each team.~~
+    - (New) It will display the top 100 tweets of the query and display an overall emotional sentiment score.
+    - (New) Users can input custom queries to search the overall emotional sentiment by analyzing 100 most popular related-tweets from Twitter's API
+    - ~~It compares that metric to previous events to assess wether the team is outperforming or underperforming expectations.~~
     
   - Database:
     - We are using a user database to keep track of user's account 
-    - We are using a database to keep track of past events and their resulting measure of positive vs negative comments for comparison purposes
+    - We are using a database to keep track of past queries and save them for ease.~~events and their resulting measure of positive vs negative comments for comparison purposes~~
+    - We are using MongoDB
     
   - Datasets via API:
     - iSports API will be used to retrieve live sports events.
@@ -23,11 +28,12 @@ Idea 1: Live Sports Event Opinion Categorizer
     - Twitter's API will be used to help users log in.
     
   - Decoupled Structure:
-    - Javascript will be used for programming the frontend
-    - Python will be used to handle the backend, specifically through DJANGO's framework
+    - ReactJS will be used for frontend
+    - (Changed [was originally going with Flask or Django]) NodeJS will be used to handle the backend
+    - Our middleware will be ExpressJS
 
 
-Idea 2: Music generator based on weather and location
+**(Not selected)**~~Idea 2: Music generator based on weather and location~~
 
   - Description: A web app that creates a playlist for users based on their location, weather and movement.
   - Detailed description:
