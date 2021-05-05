@@ -1,3 +1,5 @@
+**Due to certain limitations and current scope of the project, this scenario no longer applies.**
+
 As a user, I want to customize my app in the setting component
 case1:
   I want to manage my account, then I can click the "account management". It allows me to 
