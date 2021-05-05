@@ -12,7 +12,8 @@ const API_KEY = process.env.API_KEY;
 const API_SECRET_KEY = process.env.API_SECRET_KEY;
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const ACESSS_SECRET_TOKEN = process.env.ACESSS_SECRET_TOKEN;
-
+const SPORTS_KEY = process.env.SPORTS_KEY;
+const SPORTS_URL = process.env.SPORTS_URL;
 
 const client = new Twitter({
   consumer_key: API_KEY,

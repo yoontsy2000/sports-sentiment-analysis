@@ -7,6 +7,7 @@ const axios = require('axios');
 const users = require("./routes/api/users");
 const twitter = require("./routes/api/twitter");
 const watson = require("./routes/api/watson");
+const sports = require("./routes/api/sports");
 
 // Database
 const mongoose = require("mongoose");
@@ -33,6 +34,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/twitter", twitter)
 app.use("/api/watson", watson)
+app.use("/api/sports", sports)
 
 const MONGO_URI = process.env.MONGO_URI
 mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
