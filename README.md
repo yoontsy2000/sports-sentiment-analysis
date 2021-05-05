@@ -5,11 +5,11 @@
 Twitter uses OAuth 2.0. More will be explained later in this document.
 
 # Resources:
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-This project uses documentations and other resources(templates, sample component code) for [Material UI](https://material-ui.com/getting-started/templates/).
-This project uses [MongoDB](https://www.mongodb.com/). You are required to set up your own MongoDB.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).</br>
+This project uses documentations and other resources(templates, sample component code) for [Material UI](https://material-ui.com/getting-started/templates/).</br>
+This project uses [MongoDB](https://www.mongodb.com/). You are required to set up your own MongoDB.</br>
 
-Make sure that [Node](https://nodejs.org/en/) is installed.
+Make sure that [Node](https://nodejs.org/en/) is installed.</br>
 You will need to use Express for middleware functions. You can find the documentations [here](https://expressjs.com/).
 
 This project uses the following APIs:
