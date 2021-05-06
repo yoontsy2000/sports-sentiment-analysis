@@ -22,7 +22,6 @@ var preferedLeagues = new Array(
 var activeStatuses = new Array(
     1,2,3,4,5);
 
-
 /*
  * Returns a filtered list of important live games
  */
@@ -46,7 +45,7 @@ const liveSports = () => new Promise((resolve, reject) => {
  */
 router.get('/live', (req, res) => {
     liveSports().then(response => {
-        res.send("TEST");
+        res.send(response);
     })
 })
 
@@ -68,6 +67,7 @@ router.post('/favs/add', (req, res) => {
 router.post('/favs/delete', (req, res) => {
     const email = req.query.email
     const teamName = req.query.teamName
+    console.log(email, teamName)
     deleteTeam(email, teamName).then(response => {
         res.send(response);
     })
@@ -94,12 +94,12 @@ const addNewTeam = (userEmail, teamName) => new Promise((resolve, reject) => {
                   console.log(err);
                 } else {
                   console.log("Successfully updated.");
-                  resolve(true);
+                  resolve(user.teams);
                 };
             })
         } else {
             console.log("Entry already exists.")
-            resolve(false);
+            resolve(user.teams);
         }
     })
 })
@@ -115,11 +115,11 @@ const deleteTeam = (userEmail, teamName) => new Promise((resolve, reject) => {
                   console.log(err);
                 } else {
                   console.log("Successfully updated.");
-                  resolve(true);
+                  resolve(newTeams);
                 };
             })
         } else {
-            resolve(`${teamName} does not exist in teams.`)
+            resolve(user.teams)
         }
     })
 })

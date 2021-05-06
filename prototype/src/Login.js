@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
 
-export default function Login({ hasAuthenticated }) {
+export default function Login({ hasAuthenticated, getEmail }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +38,7 @@ export default function Login({ hasAuthenticated }) {
       {headers: {'Content-Type': 'application/json'}}
     ).then((res) => {
       hasAuthenticated(res.data.success)
+      getEmail(userData.email)
       console.log("Logged in!")
     }).catch((res) => {
       console.log("Login fail!", res)
@@ -97,5 +98,6 @@ export default function Login({ hasAuthenticated }) {
 }
 
 Login.propTypes = {
-  hasAuthenticated: PropTypes.func.isRequired
+  hasAuthenticated: PropTypes.func.isRequired,
+  getEmail: PropTypes.func.isRequired
 }

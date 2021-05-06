@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +14,14 @@ import Dashboard from './Dashboard'
 function App() {
 
   const [isAuthenticated, hasAuthenticated] = useState(false);
-
+  const [email, getEmail] = useState('');
+  
   if (!isAuthenticated) {
-    return <Login hasAuthenticated={hasAuthenticated}/>
+    return <Login hasAuthenticated={hasAuthenticated} getEmail={getEmail}/>
+  } else {
+    if (email) {
+      return <Dashboard email={email}/>
+    }
   }
 
   return (
@@ -29,8 +34,8 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path={["/", "/dashboard"]}>
-            <Dashboard />
+          <Route path={["/"]}>
+            <Dashboard/>
           </Route>
         </Switch>  
       </BrowserRouter>   

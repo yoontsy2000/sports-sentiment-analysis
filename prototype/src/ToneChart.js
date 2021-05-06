@@ -10,7 +10,7 @@ const chartConfig = {
     datasets: [
       {
         label: "Emotional Scores",
-        data: [1, 1, 1, 1, 1],
+        data: [0, 0, 0, 0, 0],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)", // Red
           "rgba(255, 206, 86, 0.2)", // Yellow
@@ -45,14 +45,17 @@ const chartConfig = {
 };
 
 const ToneChart = (props) => {
+
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
+  const [tones, setTones] = useState([]);
   const data = chartConfig.data.datasets;
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chart(chartContainer.current, chartConfig);
       setChartInstance(newChartInstance);
+      updateDataset(0, props.tones)
     }
   }, [chartContainer]);
 

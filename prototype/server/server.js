@@ -51,6 +51,7 @@ app.listen(port, () => {
 
 app.get('/tone', (req, res) => {
   const query = req.query.search
+  console.log('Query from')
 
   axios.get(`${url}/api/twitter/search`, {
     params: {
@@ -72,6 +73,8 @@ app.get('/tone', (req, res) => {
     //returns the emotion tone analyzer of the parsedText
     }).then(response => {
       res.send(response.data.document_tone.tone_categories[0])
+    }).catch(error => {
+      console.log(error)
     })
   })
   .catch(error => console.log(error))
