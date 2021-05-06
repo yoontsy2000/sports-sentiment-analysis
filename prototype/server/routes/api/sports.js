@@ -61,7 +61,15 @@ router.post('/favs/add', (req, res) => {
     const email = req.query.email
     const teamName = req.query.teamName
     addNewTeam(email, teamName).then(response => {
-        res.send("SUCCESS");
+        res.send(response);
+    })
+})
+
+router.post('/favs/delete', (req, res) => {
+    const email = req.query.email
+    const teamName = req.query.teamName
+    deleteTeam(email, teamName).then(response => {
+        res.send(response);
     })
 })
 
@@ -78,18 +86,48 @@ const addNewTeam = (userEmail, teamName) => new Promise((resolve, reject) => {
     TeamPreferences.findOne({ email: userEmail }).then(user => {
         console.log("Current:", user.teams)
         console.log("Adding:", teamName)
-        const newTeams = user.teams
-        newTeams.push(teamName)
-        TeamPreferences.updateOne({ email: userEmail }, { teams: newTeams},  function(err) {
-            if(err) {
-              console.log(err);
-            } else {
-              console.log("Successfully updated.");
-              resolve("Success!");
-            };
-        })
+        if (!user.teams.includes(teamName)) {
+            const newTeams = user.teams
+            newTeams.push(teamName)
+            TeamPreferences.updateOne({ email: userEmail }, { teams: newTeams},  function(err) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  console.log("Successfully updated.");
+                  resolve(true);
+                };
+            })
+        } else {
+            console.log("Entry already exists.")
+            resolve(false);
+        }
     })
 })
 
+const deleteTeam = (userEmail, teamName) => new Promise((resolve, reject) => {
+    TeamPreferences.findOne({ email: userEmail}).then(user => {
+        console.log("Current:", user.teams)
+        console.log("Deleting:", teamName)
+        if (user.teams.includes(teamName)) {
+            const newTeams = removeArray(user.teams, teamName)
+            TeamPreferences.updateOne({ email: userEmail }, { teams: newTeams},  function(err) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  console.log("Successfully updated.");
+                  resolve(true);
+                };
+            })
+        } else {
+            resolve(`${teamName} does not exist in teams.`)
+        }
+    })
+})
+
+function removeArray(list, value) {
+    return list.filter(function (element) {
+        return element != value;
+    });
+}
 
 module.exports = router;
