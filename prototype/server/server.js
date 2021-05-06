@@ -60,7 +60,7 @@ app.get('/tone', (req, res) => {
   .then(response => {
     const tweets = response.data.statuses
     var parsedText = ""
-
+    //parses all the 5 tweets into one text to run on the tone analyzer
     tweets.forEach((tweet) => {
       parsedText += tweet.text
     })
@@ -69,6 +69,7 @@ app.get('/tone', (req, res) => {
       params: {
         text: parsedText
       }
+    //returns the emotion tone analyzer of the parsedText
     }).then(response => {
       res.send(response.data.document_tone.tone_categories[0])
     })

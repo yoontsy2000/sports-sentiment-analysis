@@ -17,6 +17,9 @@ const toneAnalyzer = new ToneAnalyzerV3({
   serviceUrl: WATSON_API_URL
 });
 
+
+//Watson API function for inputting a text that would give us the tone categories
+//and the scores for each tone categories. 
 router.get('/tone', (req, res) => {
   const query = req.query.text
   toneAnalyzer.tone(
