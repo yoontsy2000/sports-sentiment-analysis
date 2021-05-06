@@ -15,6 +15,8 @@ const client = new Twitter({
   access_token_secret: ACESSS_SECRET_TOKEN
 });
 
+//Twitter API for finding the tweets with the tag that the use inputs.
+//gives back the top 5 tweets of that specified tag
 const search_tweets = (query) => new Promise((resolve, reject) => {
   client.get('search/tweets', {q: query, result_type: 'popular', count: 5}, function(error, tweets, response) {
     if (!error) {
@@ -29,6 +31,8 @@ router.get('/test', (req, res) => {
   res.send("Hello!");
 })
 
+//Twitter search bar 
+//It will search whatever is in query into Twitter and return the tweets as results
 router.get('/search', (req, res) => {
   const query = req.query.search
   console.log(query)

@@ -8,6 +8,8 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 const User = require("../../models/User");
+const TeamPreferences = require("../../models/TeamPreferences");
+
 
 // @route POST api/users/register
 // @desc Register user
@@ -29,7 +31,15 @@ router.post("/register", (req, res) => {
         email: req.body.email,
         password: req.body.password
       });
-      // Hash password before saving in database
+      
+      //Create
+      const newTP = new TeamPreferences({
+        email: req.body.email,
+        teams: []
+      });
+
+// Hash password before saving in database
+
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
@@ -38,6 +48,8 @@ router.post("/register", (req, res) => {
             .save()
             .then(user => res.json(user))
             .catch(err => console.log(err));
+          newTP
+            .save()
         });
       });
     }

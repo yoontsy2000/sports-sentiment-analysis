@@ -8,7 +8,7 @@ Scenario A:
 
 I press a button that leads me to the registration page where it asks for my basic information. 
 I create my username and password. 
-The page will direct me to the main dashboard, and I can add my favorite team / teams that I want to focus on.” 
+The page will direct me to the main dashboard, and ~~I can add my favorite team / teams that I want to focus on.~~” 
 
 Scenario B (If username already exists / Weak password):
 
