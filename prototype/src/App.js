@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  BrowserRouter,
 } from "react-router-dom";
 
 import Tweets from './Tweets'
@@ -12,9 +13,15 @@ import Dashboard from './Dashboard'
 
 function App() {
 
+  const [isAuthenticated, hasAuthenticated] = useState(false);
+
+  if (!isAuthenticated) {
+    return <Login hasAuthenticated={hasAuthenticated}/>
+  }
+
   return (
     <div>
-      <Router>
+      <BrowserRouter>
         <Switch>
           <Route path="/login">
             <Login />
@@ -22,11 +29,11 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/dashboard">
+          <Route path={["/", "/dashboard"]}>
             <Dashboard />
           </Route>
         </Switch>  
-      </Router>   
+      </BrowserRouter>   
       {/* <Tweets/> */}
     </div>
   );

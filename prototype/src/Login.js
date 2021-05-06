@@ -1,4 +1,5 @@
 import axios from 'axios'
+import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -8,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
 
-export default function Login() {
+export default function Login({ hasAuthenticated }) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,24 +30,24 @@ export default function Login() {
       default:
         break;
     }
-    console.log(`Changed state of ${name} to ${value}`)
   }
 
   const login = async (userData) => {
     return axios.post('http://127.0.0.1:5000/api/users/login',
       userData,
       {headers: {'Content-Type': 'application/json'}}
-    ).then(() => {
+    ).then((res) => {
+      hasAuthenticated(res.data.success)
       console.log("Logged in!")
-    }).catch(() => {
-      console.log("Login fail!")
+    }).catch((res) => {
+      console.log("Login fail!", res)
     })
   }
 
   const onSubmit = (event) => {
+    event.preventDefault();
     console.log("Submitted!")
     login(userData)
-    event.preventDefault();
   }
 
   const userData = {
@@ -91,7 +92,10 @@ export default function Login() {
           Don't have an account? Register here!
         </Link>
       </form>
-      
     </div>
   )
+}
+
+Login.propTypes = {
+  hasAuthenticated: PropTypes.func.isRequired
 }

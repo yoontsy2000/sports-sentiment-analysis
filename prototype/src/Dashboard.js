@@ -36,6 +36,7 @@ export default function Dashboard() {
 
   const [tones, setTones] = useState([]);
   const [query, setQuery] = useState("")
+  const [data, setData] = useState([])
   const url = 'http://127.0.0.1:5000'
 
   const getTones = () => {
