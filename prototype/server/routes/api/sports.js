@@ -53,8 +53,16 @@ router.get('/live', (req, res) => {
 router.get('/favs', (req, res) => {
     const email = req.query.email
     getPreferedTeams(email).then(response => {
-        res.send(response.data);
+        res.send(response);
     }).catch(error => console.log(error))
+})
+
+router.post('/favs/add', (req, res) => {
+    const email = req.query.email
+    const teamName = req.query.teamName
+    addNewTeam(email, teamName).then(response => {
+        res.send("SUCCESS");
+    })
 })
 
 /*
@@ -62,7 +70,24 @@ router.get('/favs', (req, res) => {
  */
 const getPreferedTeams = (userEmail) => new Promise((resolve, reject) => {
     TeamPreferences.findOne({ email: userEmail }).then(user => {
-        return user.teams;
+        resolve(user.teams);
+    })
+})
+
+const addNewTeam = (userEmail, teamName) => new Promise((resolve, reject) => {
+    TeamPreferences.findOne({ email: userEmail }).then(user => {
+        console.log("Current:", user.teams)
+        console.log("Adding:", teamName)
+        const newTeams = user.teams
+        newTeams.push(teamName)
+        TeamPreferences.updateOne({ email: userEmail }, { teams: newTeams},  function(err) {
+            if(err) {
+              console.log(err);
+            } else {
+              console.log("Successfully updated.");
+              resolve("Success!");
+            };
+        })
     })
 })
 
