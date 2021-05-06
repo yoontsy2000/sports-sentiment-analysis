@@ -1,7 +1,10 @@
+##Due to the limitations and the smaller scope of this project, we have decided that this scenario is no longer applicable.
+
 Use Case 4:    User wants to know what the other people think about the team
 Actor: 		Fans
+
 User case overview:
-		fans would like to know how the other people think about the team's information such as how they think about the team
+		Fans would like to know how the other people think about the team's information such as how they think about the team
 
 Subject Area: the website:
 Trigger:	the game will start soon
