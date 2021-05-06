@@ -53,6 +53,9 @@ router.get('/live', (req, res) => {
     })
 })
 
+/*
+ * Returns the favorite teams of an email -- NOT TESTED
+ */
 const getPreferedTeams = (userEmail) => new Promise((resolve, reject) => {
 
     TeamPreferences.findOne({ email: userEmail }).then(user => {
