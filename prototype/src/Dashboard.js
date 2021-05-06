@@ -47,6 +47,7 @@ export default function Dashboard() {
     }).then(response => {
       console.log(response.data)
       setTones(response.data.tones)
+      tones.forEach()
     })
     .catch(error => console.log(error))
   }
