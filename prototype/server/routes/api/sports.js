@@ -48,16 +48,19 @@ router.get('/live', (req, res) => {
     liveSports().then(response => {
         res.send("TEST");
     })
-    getPreferedTeams("email").then(response => {
-        res.send("TEST");
-    })
+})
+
+router.get('/favs', (req, res) => {
+    const email = req.query.email
+    getPreferedTeams(email).then(response => {
+        res.send(response.data);
+    }).catch(error => console.log(error))
 })
 
 /*
  * Returns the favorite teams of an email -- NOT TESTED
  */
 const getPreferedTeams = (userEmail) => new Promise((resolve, reject) => {
-
     TeamPreferences.findOne({ email: userEmail }).then(user => {
         return user.teams;
     })
